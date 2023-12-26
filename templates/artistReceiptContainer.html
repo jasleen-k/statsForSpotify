@@ -1,0 +1,47 @@
+{% macro artistReceiptContainer(display_name, artists, id, duration) -%}
+<div class="receiptContainer" id="{{ id }}">
+  <h3 class="logo">STATS FOR SPOTIFY
+  </h3>  <p class="period">{{ duration }}</p>
+  <p class="date">ORDER #0001 FOR {{ display_name }}</p>
+  <p class="date">{{currentTime}}</p>
+
+  <table class="artists">
+    <thead>
+      <tr>
+        <td class="begin">QTY</td>
+        <td>ITEM</td>
+        <td class="empty"></td>
+        <td class="length">AMT</td>
+      </tr>
+    </thead>
+    {% for artist in artists %}
+    <tr>
+      <td class="begin">{{ loop.index }}</td>
+      <td class="name">{{ artist.name }}</td>
+      <td class="empty"></td>
+      <td class="length">{{ artist.popularity }}</td>
+    </tr>
+    {% endfor %}
+    <tr class="total-counts">
+      <td class="begin" colspan="2">ITEM COUNT:</td>
+      <td class="empty"></td>
+      <td class="length">{{ artists | length }}</td>
+    </tr>
+    <tr class="total-counts-end">
+      <td class="begin" colspan="2">TOTAL:</td>
+      <td class="empty"></td>
+      <td class="length">{{(artists | sum(attribute='popularity'))}}</td>
+    </tr>
+  </table>
+  <p class="date">CARD #: **** **** **** {{ currentYear }}</p>
+  <p class="date">CARDHOLDER: {{ display_name }}</p>
+  <div class="thanks">
+    <p>THANK YOU FOR VISITING!</p>
+    <img
+      style="width: 80%"
+      src="{{ url_for('static', filename='barcode.png') }}"
+    />
+  </div>
+</div>
+
+{%- endmacro %}

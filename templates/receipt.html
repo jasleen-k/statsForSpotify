@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    {% from "trackReceiptContainer.html" import trackReceiptContainer with context %} {%
+    from "artistReceiptContainer.html" import artistReceiptContainer with
+    context %}
+
+    <script>
+      var activeReceipt;
+      function showContent(id) {
+        for (
+          let i = 0;
+          i < document.querySelectorAll('.receiptContainer').length;
+          i++
+        ) {
+          document.querySelectorAll('.receiptContainer')[i].style.display =
+            'none';
+        }
+        document.getElementById(id).style.display = 'inline-block';
+        document.getElementById('downloadPicButton').style.display =
+          'inline-block';
+        activeReceipt = id;
+      }
+    </script>
+
+    <div>
+      <center>
+        <h1 class="receiptPageHeader">Stats For Spotify</h1>
+        <h2 class="receiptPageSubtext">Top Track Generator</h2>
+      </center>
+    </div>
+    <div style="width: 100%; height: auto" class="buttons">
+      <center>
+        <div>
+          <div>
+            <button
+              onclick="showContent('short_term_tracks_receipt')"
+              class="generatePicButton"
+            >
+              Tracks: Last Month
+            </button>
+            <button
+              onclick="showContent('medium_term_tracks_receipt')"
+              class="generatePicButton"
+            >
+              Tracks: Last 6 Months
+            </button>
+            <button
+              onclick="showContent('long_term_tracks_receipt')"
+              class="generatePicButton"
+            >
+              Tracks: All Time
+            </button>
+          </div>
+          <div>
+            <button
+              onclick="showContent('short_term_artists_receipt')"
+              class="generatePicButton"
+            >
+              Artists: Last Month
+            </button>
+            <button
+              onclick="showContent('medium_term_artists_receipt')"
+              class="generatePicButton"
+            >
+              Artists: Last 6 Months
+            </button>
+            <button
+              onclick="showContent('long_term_artists_receipt')"
+              class="generatePicButton"
+            >
+              Artists: All Time
+            </button>
+            <button
+              onClick="ExecPythonCommand('create_playlist()')"
+              onclick="{{create_playlist(sp, current_user_id, user_display_name, track_seed, artist_seed)}}"
+              class="generatePicButton"
+            >
+              Generate Personal Playlist
+            </button>
+          </div>
+        </div>
+      </center>
+    </div>
+    <div style="width: 100%; height: auto" class="receiptContainerWrapper">
+      <center>
+        {{ trackReceiptContainer(user_display_name, short_term_tracks['items'],
+        'short_term_tracks_receipt', 'LAST MONTH') }} {{
+        trackReceiptContainer(user_display_name, medium_term_tracks['items'],
+        'medium_term_tracks_receipt', 'LAST 6 MONTHS') }} {{
+          trackReceiptContainer(user_display_name, long_term_tracks['items'],
+        'long_term_tracks_receipt', 'ALL TIME') }} {{
+        artistReceiptContainer(user_display_name, short_term_artists['items'],
+        'short_term_artists_receipt', 'LAST MONTH') }} {{
+        artistReceiptContainer(user_display_name, medium_term_artists['items'],
+        'medium_term_artists_receipt', 'LAST 6 MONTHS') }} {{
+        artistReceiptContainer(user_display_name, long_term_artists['items'],
+        'long_term_artists_receipt', 'ALL TIME') }}
+      </center>
+    </div>
+  </body>
+</html>
