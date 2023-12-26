@@ -6,4 +6,4 @@
 
 <img src="./static/app.jpeg" width="850" title="app">
 <img src="./static/sample.jpeg" width="850" title="sample">
-<img src="./static/playlst.jpeg" width="850" title="playlst">
+<img src="./static/playlist.jpeg" width="850" title="playlist">
