@@ -122,3 +122,12 @@ table {
 .empty {
   width: 30%;
 }
+
+.receiptSubHeader {
+  padding: 0px;
+  margin: 0px;
+}
+
+.receiptSubHeaderDate {
+  margin-top: 0px;
+}

@@ -1,9 +1,10 @@
 {% macro artistReceiptContainer(display_name, artists, id, duration) -%}
 <div class="receiptContainer" id="{{ id }}">
   <h3 class="logo">STATS FOR SPOTIFY
-  </h3>  <p class="period">{{ duration }}</p>
-  <p class="date">ORDER #0001 FOR {{ display_name }}</p>
-  <p class="date">{{currentTime}}</p>
+  </h3>  
+<p class="period receiptSubHeader">{{ duration }}</p>
+  <p class="date receiptSubHeader">ORDER #0001 FOR {{ display_name }}</p>
+  <p class="date receiptSubHeaderDate">{{currentTime}}</p>
 
   <table class="artists">
     <thead>
